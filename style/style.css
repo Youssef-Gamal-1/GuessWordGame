@@ -1,0 +1,114 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #EEE;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  font-weight: bold;
+  line-height: 1.8;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+  margin: 0 0 50px;
+  background-color: #fff;
+}
+
+.guess-game {
+  width: 1000px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px auto;
+  gap: 50px;
+  justify-content: space-between;
+}
+.guess-game .game-area {
+  flex: 1;
+}
+.guess-game .game-area .inputs > div input {
+  width: 70px;
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 10px 3px;
+  color: #333;
+  border: none;
+  border-bottom: 3px solid #333;
+}
+.guess-game .game-area .inputs > div input:focus {
+  outline-color: #ccc;
+}
+.guess-game .game-area .inputs > div input.yes-in-place {
+  color: #f44336;
+  border: #f44336;
+  color: #fff;
+}
+.guess-game .game-area .inputs > div input.not-in-place {
+  color: #18ba89;
+  border: #18ba89;
+  color: #fff;
+}
+.guess-game .game-area .inputs > div input.wrong {
+  color: #27303f;
+  border: #27303f;
+  color: #fff;
+}
+.guess-game .game-area .inputs > div.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.guess-game .game-area .inputs > div span {
+  color: #333;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-right: 15px;
+}
+.guess-game .key-colors .key-color {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: white;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+.guess-game .key-colors .key-color .key {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+.guess-game .key-colors .key-color .key.in-place {
+  background-color: #f89e13;
+}
+.guess-game .key-colors .key-color .key.not-in-place {
+  background-color: #18ba89;
+}
+.guess-game .key-colors .key-color .key.wrong {
+  background-color: #27303f;
+}/*# sourceMappingURL=style.css.map */

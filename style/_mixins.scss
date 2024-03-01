@@ -1,0 +1,5 @@
+@mixin options-colors($color){
+    color: $color;
+    border: $color;
+    color: #fff;
+}

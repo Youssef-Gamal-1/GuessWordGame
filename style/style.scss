@@ -1,0 +1,90 @@
+@use 'general';
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'components';
+@use 'footer';
+
+h1{
+    text-align: center;
+    padding: 20px;
+    margin: 0 0 50px;
+    background-color: #fff;
+}
+
+.guess-game{
+    width: 1000px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px auto;
+    gap: 50px;
+    justify-content: space-between;
+    .game-area{
+        flex: 1;
+        .inputs{
+            > div{
+                input{
+                    width: 70px;
+                    text-align: center;
+                    font-size: 2.5rem;
+                    margin: 10px 3px;
+                    color: #333;
+                    border: none;
+                    border-bottom: 3px solid #333;
+                    &:focus{
+                        outline-color: #ccc
+                    }
+                    &.yes-in-place{
+                        @include options-colors($main-color);
+                    }
+                    &.not-in-place{
+                        @include options-colors(#18ba89);
+                    }
+                    &.wrong{
+                        @include options-colors(#27303f);
+                    }
+                }
+                &.disabled{
+                    opacity: .5;
+                    pointer-events: none;
+                }
+                span{
+                    color: #333;
+                    font-size: 1.4rem;
+                    font-weight: bold;
+                    margin-right: 15px;
+                }
+
+            }
+
+        }
+    }
+    .key-colors{
+        .key-color{
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            .key{
+                width: 30px;
+                height: 30px;
+                margin-right: 10px;
+                border-radius: 50%;
+                &.in-place{
+                    background-color: #f89e13
+                }
+                &.not-in-place{
+                    background-color: #18ba89
+                }
+                &.wrong{
+                    background-color: #27303f
+                }
+            }
+        }
+    }
+}
+footer{
+    @extend footer;
+}
