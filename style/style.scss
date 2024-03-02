@@ -75,6 +75,9 @@ h1{
                 }
                 &.hint{
                     background-color: #009688;
+                    span {
+                        margin-right: 5px;
+                    }
                 }
                 &.disabled{
                     background-color: black;

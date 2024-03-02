@@ -113,6 +113,9 @@ h1 {
 .guess-game .game-area .control button.hint {
   background-color: #009688;
 }
+.guess-game .game-area .control button.hint span {
+  margin-right: 5px;
+}
 .guess-game .game-area .control button.disabled {
   background-color: black;
   opacity: 0.5;

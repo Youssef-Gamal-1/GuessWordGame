@@ -8,12 +8,14 @@ document.querySelector('footer').innerHTML = `${gameName} </br> Game created by 
 let numberOfTries = 6;
 let numberOfLetters = 6;
 let currentTry = 1;
+let numberOfHints = 2;
 
 // Manage words
 let wordToGuess = '';
 const words = ['Create','Delete','Update','Master','Branch','Mainly','Yousef','School'];
 wordToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase(); // get random word from the array
 let messageArea = document.querySelector('.message');
+document.querySelector('.hint span').innerHTML = numberOfHints;
 
 
 function generateInput() {
@@ -113,9 +115,12 @@ function generateInput() {
         });
     })
 }
-
-let guessButton = document.querySelector('button.check');
+// Manage check button
+const guessButton = document.querySelector('button.check');
 guessButton.addEventListener('click',handleGuesses);
+// Manage hint
+const hintBtn = document.querySelector('.hint');
+hintBtn.addEventListener('click',getHint);
 
 console.log(wordToGuess);
 function handleGuesses(){
@@ -193,6 +198,31 @@ function handleGuesses(){
         }
     }
     
+}
+
+
+
+function getHint(){
+    if(numberOfHints > 0){
+        numberOfHints--;
+        document.querySelector('.hint span').innerHTML = numberOfHints;
+    }
+    if(numberOfHints === 0){
+        hintBtn.disabled = true;
+    }
+
+    const enabledInputs = document.querySelectorAll('input:not([disabled])');
+    const emptyEnabledInputs = Array.from(enabledInputs).filter((e) => e.value === '');
+    
+    if(emptyEnabledInputs.length > 0){
+        const randomIndex = Math.floor(Math.random() * emptyEnabledInputs.length);
+        const randomInput = emptyEnabledInputs[randomIndex];
+        const indexToFill = Array.from(enabledInputs).indexOf(randomInput);
+        // console.log(randomIndex);
+        if(indexToFill !== -1) {
+            randomInput.value = wordToGuess[indexToFill].toUpperCase();
+        }
+    }
 }
 
 window.addEventListener('load', generateInput);
