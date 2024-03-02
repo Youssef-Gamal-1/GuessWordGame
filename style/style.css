@@ -22,7 +22,6 @@ body {
 
 footer {
   text-align: center;
-  padding: 20px;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -65,17 +64,17 @@ h1 {
   outline-color: #ccc;
 }
 .guess-game .game-area .inputs > div input.yes-in-place {
-  color: #f44336;
-  border: #f44336;
+  background-color: #f89e13;
+  border: #f89e13;
   color: #fff;
 }
 .guess-game .game-area .inputs > div input.not-in-place {
-  color: #18ba89;
+  background-color: #18ba89;
   border: #18ba89;
   color: #fff;
 }
 .guess-game .game-area .inputs > div input.wrong {
-  color: #27303f;
+  background-color: #27303f;
   border: #27303f;
   color: #fff;
 }
@@ -88,6 +87,48 @@ h1 {
   font-size: 1.4rem;
   font-weight: bold;
   margin-right: 15px;
+}
+.guess-game .game-area .control {
+  padding: 20px;
+  display: flex;
+  gap: 5px;
+}
+.guess-game .game-area .control button {
+  padding: 15px 20px;
+  color: white;
+  outline: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.guess-game .game-area .control button.check {
+  background-color: #f44336;
+  flex: 1;
+}
+.guess-game .game-area .control button.hint {
+  background-color: #009688;
+}
+.guess-game .game-area .control button.disabled {
+  background-color: black;
+  opacity: 0.5;
+  cursor: no-drop;
+}
+.guess-game .game-area .message {
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+}
+.guess-game .game-area .message span {
+  display: block;
+  font-size: 50px;
+  color: #f44336;
+  text-transform: capitalize;
+  margin-top: 10px;
+}
+.guess-game .game-area .message p {
+  margin-top: 15px;
 }
 .guess-game .key-colors .key-color {
   display: flex;

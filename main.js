@@ -9,105 +9,166 @@ let numberOfTries = 6;
 let numberOfLetters = 6;
 let currentTry = 1;
 
-function generateInput(){
+// Manage words
+let wordToGuess = '';
+const words = ['Create','Delete','Update','Master','Branch','Mainly','Yousef','School'];
+wordToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase(); // get random word from the array
+let messageArea = document.querySelector('.message');
+
+
+function generateInput() {
     const inputsContainer = document.querySelector('.inputs');
     // create try div
-    for(let i = 1;i <= numberOfTries;i++){
+    for (let i = 1; i <= numberOfTries; i++) {
         let tryDiv = document.createElement('div');
         tryDiv.classList.add(`try-${i}`);
         tryDiv.innerHTML = `<span>Try-${i}</span>`;
-        if(i !== 1) tryDiv.classList.add('disabled');
+        if (i !== 1) tryDiv.classList.add('disabled');
         // Create inputs
-        for(let j = 1;j <= numberOfLetters;j++){
+        for (let j = 1; j <= numberOfLetters; j++) {
             const input = document.createElement('input');
             input.type = 'text';
             input.id = `guess-${i}-letter-${j}`;
-            input.setAttribute('maxlength',"1");
+            input.setAttribute('maxlength', "1");
             tryDiv.appendChild(input);
         }
 
         inputsContainer.appendChild(tryDiv);
     }
-    inputsContainer.children[0].children[1].focus(); 
+    inputsContainer.children[0].children[1].focus();
 
     const disabledInputs = document.querySelectorAll('.disabled input');
     disabledInputs.forEach((input) => input.disabled = true);
 
     inputs = document.querySelectorAll('input');
-    inputs.forEach((input,index) => {
-        input.addEventListener('input',function(){
+    inputs.forEach((input, index) => {
+        input.addEventListener('input', function () {
             this.value = this.value.toUpperCase();
             const nextInput = inputs[index + 1];
-            if(nextInput) nextInput.focus();
+            if (nextInput) nextInput.focus();
         });
-        input.addEventListener('keydown',function(event){
+        input.addEventListener('keydown', function (event) {
             // console.log(event);
             const currentIndex = Array.from(inputs).indexOf(event.target); // this or event.target
-            
-// setting game name
-let gameName = 'Guess The Word Game';
-document.title = gameName;
-document.querySelector('h1').innerHTML = gameName;
-document.querySelector('footer').innerHTML = `${gameName} </br> Game created by Eng.Youssef Gamal`;
 
-// game options
-let numberOfTries = 6;
-let numberOfLetters = 6;
-let currentTry = 1;
+            // setting game name
+            let gameName = 'Guess The Word Game';
+            document.title = gameName;
+            document.querySelector('h1').innerHTML = gameName;
+            document.querySelector('footer').innerHTML = `${gameName} </br> Game created by Eng.Youssef Gamal`;
 
-function generateInput(){
-    const inputsContainer = document.querySelector('.inputs');
-    // create try div
-    for(let i = 1;i <= numberOfTries;i++){
-        let tryDiv = document.createElement('div');
-        tryDiv.classList.add(`try-${i}`);
-        tryDiv.innerHTML = `<span>Try-${i}</span>`;
-        if(i !== 1) tryDiv.classList.add('disabled');
-        // Create inputs
-        for(let j = 1;j <= numberOfLetters;j++){
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.id = `guess-${i}-letter-${j}`;
-            input.setAttribute('maxlength',"1");
-            tryDiv.appendChild(input);
-        }
+            // game options
+            let numberOfTries = 6;
+            let numberOfLetters = 6;
+            let currentTry = 1;
 
-        inputsContainer.appendChild(tryDiv);
+            function generateInput() {
+                const inputsContainer = document.querySelector('.inputs');
+                // create try div
+                for (let i = 1; i <= numberOfTries; i++) {
+                    let tryDiv = document.createElement('div');
+                    tryDiv.classList.add(`try-${i}`);
+                    tryDiv.innerHTML = `<span>Try-${i}</span>`;
+                    if (i !== 1) tryDiv.classList.add('disabled');
+                    // Create inputs
+                    for (let j = 1; j <= numberOfLetters; j++) {
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.id = `guess-${i}-letter-${j}`;
+                        input.setAttribute('maxlength', "1");
+                        tryDiv.appendChild(input);
+                    }
+
+                    inputsContainer.appendChild(tryDiv);
+                }
+                inputsContainer.children[0].children[1].focus();
+
+                const disabledInputs = document.querySelectorAll('.disabled input');
+                disabledInputs.forEach((input) => input.disabled = true);
+
+                inputs = document.querySelectorAll('input');
+                inputs.forEach((input, index) => {
+                    input.addEventListener('input', function () {
+                        this.value = this.value.toUpperCase();
+                        const nextInput = inputs[index + 1];
+                        if (nextInput) nextInput.focus();
+                    });
+                    input.addEventListener('keydown', function (event) {
+                        // console.log(event);
+                        const currentIndex = Array.from(inputs).indexOf(event.target); // this or event.target
+
+                        if (event.key === 'ArrowRight') {
+                            const nextInput = currentIndex + 1;
+                            if (nextInput < inputs.legnth) inputs[nextInput].focus();
+                        }
+
+                        if (event.key === 'ArrowLeft') {
+                            const pervInput = currentIndex - 1;
+                            if (pervInput < inputs.legnth) inputs[pervInput].focus();
+                        }
+
+                    });
+                })
+            }
+        });
+    })
+}
+
+let guessButton = document.querySelector('button.check');
+guessButton.addEventListener('click',handleGuesses);
+
+console.log(wordToGuess);
+function handleGuesses(){
+    let successGuess = true;
+    for(let i = 1;i <= numberOfLetters;i++){
+        const inputField = document.querySelector(`#guess-${currentTry}-letter-${i}`);
+        const letter = inputField.value.toLowerCase();
+        const actualLetter = wordToGuess[i - 1];
+        // Game logic
+
+        // solution 1
+        // if(letter === actualLetter) {
+        //     //letter found and in place
+        //     inputField.classList.add('yes-in-place');
+        // } else {
+        //     for(let l in wordToGuess){
+        //         if(letter === l) {
+        //             // letter found but not in place
+        //             inputField.classList.add('not-in-place');
+        //         } else {
+        //             // letter not found
+        //             inputField.classList.add('wrong');
+        //         }
+        //     }
+        // }
+
+        // solution 2
+            if(letter === actualLetter) {
+                //letter found and in place
+                inputField.classList.add('yes-in-place');
+            } else if(wordToGuess.includes(letter) && letter !== '') {
+                // letter found but not in place
+                inputField.classList.add('not-in-place');
+                successGuess = false;
+            } else {
+                // letter not found
+                inputField.classList.add('wrong');
+                successGuess = false;
+            }
     }
-    inputsContainer.children[0].children[1].focus(); 
-
-    const disabledInputs = document.querySelectorAll('.disabled input');
-    disabledInputs.forEach((input) => input.disabled = true);
-
-    inputs = document.querySelectorAll('input');
-    inputs.forEach((input,index) => {
-        input.addEventListener('input',function(){
-            this.value = this.value.toUpperCase();
-            const nextInput = inputs[index + 1];
-            if(nextInput) nextInput.focus();
-        });
-        input.addEventListener('keydown',function(event){
-            // console.log(event);
-            const currentIndex = Array.from(inputs).indexOf(event.target); // this or event.target
-            
-            if(event.key === 'ArrowRight'){
-                const nextInput = currentIndex + 1;
-                if(nextInput < inputs.legnth) inputs[nextInput].focus();
-            }
-            
-            if(event.key === 'ArrowLeft'){
-                const pervInput = currentIndex - 1;
-                if(pervInput < inputs.legnth) inputs[pervInput].focus();
-            }
-
-        });
-    })
+    // Check if user win or lose
+    if(successGuess) {
+        messageArea.innerHTML = `You won the word is ${wordToGuess}`;
+        messageArea.style.color = 'green';
+        // disable all inputs
+        let allTries = document.querySelectorAll('.inputs > div');
+        allTries.forEach((tryDiv) => tryDiv.classList.add('disabled'));
+        // disable guess button
+        guessButton.classList.add('disabled');
+    } else {
+        console.log("You lost");
+    }
+    
 }
 
-window.addEventListener('load',generateInput);
-
-        });
-    })
-}
-
-window.addEventListener('load',generateInput);
+window.addEventListener('load', generateInput);

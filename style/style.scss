@@ -35,7 +35,7 @@ h1{
                         outline-color: #ccc
                     }
                     &.yes-in-place{
-                        @include options-colors($main-color);
+                        @include options-colors(#f89e13);
                     }
                     &.not-in-place{
                         @include options-colors(#18ba89);
@@ -54,9 +54,49 @@ h1{
                     font-weight: bold;
                     margin-right: 15px;
                 }
-
             }
-
+        }
+        .control{
+            padding: 20px;
+            display: flex;
+            gap: 5px;
+            button{
+                padding: 15px 20px;
+                color: white;
+                outline: none;
+                border: none;
+                font-size: 1.5rem;
+                font-weight: bold;
+                cursor: pointer;
+                border-radius: 5px;
+                &.check{
+                    background-color: $main-color;
+                    flex: 1
+                }
+                &.hint{
+                    background-color: #009688;
+                }
+                &.disabled{
+                    background-color: black;
+                    opacity: .5;
+                    cursor: no-drop;
+                }
+            }
+        }
+        .message{
+            font-weight: bold;
+            font-size: 30px;
+            text-align: center;
+            span{
+                display: block;
+                font-size: 50px;
+                color: $main-color;
+                text-transform: capitalize;
+                margin-top: 10px;
+            }
+            p{
+                margin-top: 15px;
+            }
         }
     }
     .key-colors{
