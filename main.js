@@ -158,7 +158,7 @@ function handleGuesses(){
     }
     // Check if user win or lose
     if(successGuess) {
-        messageArea.innerHTML = `You won the word is ${wordToGuess}`;
+        messageArea.innerHTML = `You won the word is <span>${wordToGuess}</span>`;
         messageArea.style.color = 'green';
         // disable all inputs
         let allTries = document.querySelectorAll('.inputs > div');
@@ -166,7 +166,31 @@ function handleGuesses(){
         // disable guess button
         guessButton.classList.add('disabled');
     } else {
-        console.log("You lost");
+        messageArea.innerHTML = `Try Again!`;
+        messageArea.style.color = 'red';
+
+        let allTries = document.querySelectorAll('.inputs > div');
+        // disable the current div and its inputs
+        
+        
+        allTries[currentTry - 1].classList.add('disabled');
+        prevDivInputs = document.querySelectorAll(`.try-${currentTry} input`);
+        prevDivInputs.forEach((input) => input.disabled = true);
+        // remove disable from the next div and its inputs
+        currentTry++;
+        
+        currentDivInputs = document.querySelectorAll(`.try-${currentTry} input`);
+        currentDivInputs.forEach((input) => input.disabled = false);
+        
+        let el = document.querySelector(`.try-${currentTry}`);
+        if(el){
+            allTries[currentTry - 1].classList.remove('disabled');
+            el.children[1].focus();
+        } else {
+            messageArea.innerHTML = `Game Over!`;
+            guessButton.classList.add('disabled');
+            guessButton.disabled = true;
+        }
     }
     
 }

@@ -14,7 +14,7 @@ h1{
 .guess-game{
     width: 1000px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     text-align: center;
     margin: 20px auto;
     gap: 50px;
@@ -92,7 +92,7 @@ h1{
                 font-size: 50px;
                 color: $main-color;
                 text-transform: capitalize;
-                margin-top: 10px;
+                margin-top: 5px;
             }
             p{
                 margin-top: 15px;
